@@ -1,0 +1,29 @@
+{
+	"files": [
+		{
+			"path": "media/analyzer.html",
+			"bookmarks": [
+				{
+					"line": 29,
+					"column": 48,
+					"label": ""
+				},
+				{
+					"line": 92,
+					"column": 46,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "media/script.js",
+			"bookmarks": [
+				{
+					"line": 322,
+					"column": 60,
+					"label": ""
+				}
+			]
+		}
+	]
+}

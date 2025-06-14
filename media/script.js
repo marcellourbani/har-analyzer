@@ -1,3 +1,4 @@
+/* global $ ,acquireVsCodeApi,window,xmlArr,document,xmlString*/
 var har;
 var reqs = [];
 var selectedReq;
@@ -13,6 +14,20 @@ function runSearchCriteria(reqItem, selectorType, selector, attrName, attrVal) {
         return true;
     }
     return false;
+}
+
+function hasText(index, text) {
+    if (!text) return true
+    try {
+        const { obj: { request, response } } = reqs[index]
+        if (request?.postData?.text?.includes(text)) return true
+        if (response?.content?.text?.includes(text)) return true
+        for (const h of request?.headers || [])
+            if (h?.name?.includes(text) || h?.value?.includes(text)) return true
+        for (const h of response?.headers || [])
+            if (h?.name?.includes(text) || h?.value?.includes(text)) return true
+    } catch (error) { }
+    return false
 }
 
 function runSearch() {
@@ -43,6 +58,11 @@ function runSearch() {
             $(this).hide();
             return;
         }
+        const payloadSearch = $(".searchPayload").val()
+        if (!hasText(i, payloadSearch)) {
+            $(this).hide();
+            return;
+        }
         $(this).show();
         visibleIndicies.push(i);
     });
@@ -50,13 +70,13 @@ function runSearch() {
 
 function getNextValue(thisIndex, higher) {
     if (higher) {
-        for (i = 0; i < visibleIndicies.length; i++) {
+        for (let i = 0; i < visibleIndicies.length; i++) {
             if (visibleIndicies[i] > thisIndex) {
                 return visibleIndicies[i];
             }
         }
     } else {
-        for (i = visibleIndicies.length - 1; i >= 0; i--) {
+        for (let i = visibleIndicies.length - 1; i >= 0; i--) {
             if (visibleIndicies[i] < thisIndex) {
                 return visibleIndicies[i];
             }
@@ -98,6 +118,9 @@ function setupGUI() {
         runSearch();
     });
 
+    $(".searchPayload").off().on('input', function (e) {
+        runSearch();
+    });
     $(".section-title").off().on("click", function () {
         $(this).parent().toggleClass("hide");
     });
@@ -297,6 +320,10 @@ function selectReq(index) {
         });
     });
 
+    $(".titleinner").off().on("dblclick", function () {
+        const text = JSON.stringify(selectedReq.obj, null, 4)
+        vscode.postMessage({ action: "copyToClipboard", text });
+    });
     $(".stack").html("");
     if (selectedReq.obj._initiator?.type == "script") {
         for (var i = 0; i < selectedReq.obj._initiator.stack.callFrames.length; i++) {

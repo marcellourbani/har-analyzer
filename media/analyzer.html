@@ -1,6 +1,7 @@
 <div class="request-items container">
     <div class='codicon codicon-search'></div>
     <input class="search" placeholder="Search endpoints..." />
+    <input class="searchPayload" placeholder="Search payload/headers" />
     <div class="method-filters">
         <div class="method-filter get">GET</div>
         <div class="method-filter post">POST</div>
@@ -28,7 +29,10 @@
 <div class="request-inspector container">
     <div class="inspector-label">Inspector</div>
     <div class="inspector-title" type="POST" endpoint="/example/endpoint" time="902.234514" status="200">
-        <div class="title" data="endpoint">/example/endpoint</div>
+        <div class="title">
+            <div class="titleinner" data="endpoint">/example/endpoint</div>
+            <span class="tooltiptext">Double click to copy har entry as JSON</span>
+        </div>
         <div class="method" data="method">POST</div>
         <div class="fullURL" data="fullURL">https://example.com/example/endpoint</div>
         <div class="tab-group">

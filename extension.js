@@ -107,6 +107,9 @@ function getWebviewContent(panel, context) {
 					});
 					vscode.window.showTextDocument(doc);
 				}
+				if(message.action == "copyToClipboard"){
+					vscode.env.clipboard.writeText(message.text);
+				}
 				if(message.action == "loadHAR"){
 					panel.webview.postMessage({ command: 'loadHAR', HARText: docText });
 				}

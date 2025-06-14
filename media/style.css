@@ -12,7 +12,7 @@ body {
 
 .container.request-items {
     position: fixed;
-    top: 71px;
+    top: 106px;
     left: 0;
     bottom: 0;
     width: 50%;
@@ -23,7 +23,7 @@ body {
 }
 
 .container.request-items.expanded {
-    top: 98px;
+    top: 133px;
 }
 
 .container.request-inspector {
@@ -496,6 +496,13 @@ table.stack {
 }
 
 .search {
+    top: 0;
+}
+.searchPayload {
+    top: 35px;
+}
+.search,
+.searchPayload {
     width: 50%;
     padding: 10px;
     box-sizing: border-box;
@@ -509,11 +516,12 @@ table.stack {
     padding-left: 39px;
     padding-top: 20px;
     position: fixed;
-    top: 0;
+    
     z-index: 9999;
 }
 
-.search:focus {
+.search:focus,
+.searchPayload:focus {
     outline: none ! important;
 }
 
@@ -540,7 +548,7 @@ table.stack {
     /*border-bottom: 1px solid var(--vscode-editorGroup-border);*/
     border-right: 1px solid var(--vscode-editorGroup-border);
     position: fixed;
-    top: 35px;
+    top: 70px;
     width: 50%;
     box-sizing: border-box;
     background: var(--vscode-editor-background);
@@ -626,7 +634,7 @@ table.stack {
 }
 
 .req-type-filters.expanded {
-    top: 62px;
+    top: 97px;
 }
 
 .req-type-filter {
@@ -662,4 +670,22 @@ table.stack {
     to {
         left: 100%;
     }
+}
+
+
+
+.title .tooltiptext {
+    font-size: 0.5em;
+    display: none;
+    width: calc(100% - 30px);
+    position: absolute;
+    background: var(--vscode-titleBar-activeBackground);
+    z-index: 1;
+  }
+  
+  .title:hover .tooltiptext {
+    display: block;
+  }
+.titleinner {
+    user-select: none;
 }
